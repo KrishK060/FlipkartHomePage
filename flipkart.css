@@ -161,7 +161,12 @@ body {
         display: none;
     }
 }
+@media (max-width:992px) {
 
+    .dn {
+        display: none;
+    }
+}
 @media (max-width: 768px) {
     .input-group {
         display: none;
