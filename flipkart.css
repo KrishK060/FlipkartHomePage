@@ -76,3 +76,19 @@ background-color: #f1f1f1;
   .footer .info-links ul li {
     margin-bottom: 10px;
   }
+  /* .initial-items-list{
+    width: 85vw;
+    display: grid;
+    grid-template-columns: 83% 17%;
+    gap: 10px;
+}
+ 
+.cards-wrapper{
+    display: flex;
+}
+ 
+.card{
+    margin: 0.5rem} */
+.instruments{
+    width:100%
+}
