@@ -16,13 +16,10 @@ function renderProducts(filteredData = category) {
     }
     filteredData.forEach(item => {
         const row = document.createElement('tr');
-
         const idCell = document.createElement('td');
         idCell.innerHTML = item.id;
-
         const nameCell = document.createElement('td');
         nameCell.innerHTML = item.name;
-
         const actionCell = document.createElement('td');
         const editBtn = document.createElement('button');
         editBtn.classList.add('btn', 'btn-primary');
@@ -30,22 +27,17 @@ function renderProducts(filteredData = category) {
         editBtn.setAttribute('data-id', item.id);
         editBtn.innerHTML = 'Edit';
         editBtn.addEventListener('click', () => editProduct(item.id));
-
         const deleteBtn = document.createElement('button');
         deleteBtn.classList.add('btn', 'btn-primary');
         deleteBtn.setAttribute('data-type', 'deldata');
         deleteBtn.setAttribute('data-id', item.id);
         deleteBtn.innerHTML = 'Delete';
         deleteBtn.addEventListener('click', () => deleteProduct(item.id));
-
         actionCell.appendChild(editBtn);
         actionCell.appendChild(deleteBtn);
-
         row.appendChild(idCell);
         row.appendChild(nameCell);
-
         row.appendChild(actionCell);
-
         tbody.appendChild(row);
     });
 }
@@ -112,7 +104,6 @@ function editData() {
 let form = document.querySelector("#form");
 form.addEventListener("submit", (event) => {
     event.preventDefault();
-    console.log(form.dataset.form);
     if (form.dataset.form == "add") {
         addData();
     } else {

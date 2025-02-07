@@ -242,7 +242,6 @@ function editData() {
 let form = document.querySelector("#form");
 form.addEventListener("submit", (event) => {
     event.preventDefault();
-    console.log(form.dataset.form);
     if (form.dataset.form == "add") {
         addData();
     } else {

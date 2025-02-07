@@ -16,19 +16,19 @@ if (filteredProducts.length === 0) {
 }
 filteredProducts.forEach(product => {
     if (!rowsCategory[product.category]) {
-        const Container = document.createElement('div');
-        Container.classList.add('container', 'bg-light', 'mt-3', 'p-2');
+        const container = document.createElement('div');
+        container.classList.add('container', 'bg-light', 'mt-3', 'p-2');
 
         const categoryHeading = document.createElement('h4');
         categoryHeading.textContent = product.category;
-        Container.appendChild(categoryHeading);
+        container.appendChild(categoryHeading);
 
         const categoryRow = document.createElement('div');
         categoryRow.classList.add('row', 'g-3');
         categoryRow.setAttribute('id', `row-${product.category}`);
 
-        Container.appendChild(categoryRow);
-        productList.appendChild(Container);
+        container.appendChild(categoryRow);
+        productList.appendChild(container);
 
         rowsCategory[product.category] = categoryRow;
     }

@@ -22,10 +22,10 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="./admin.html">Home</a>
+                        <a class="nav-link active" aria-current="page" href="./index.html">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../flipkart.html">flipkart</a>
+                        <a class="nav-link" href="../index.html">flipkart</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="./category.html">Category crud</a>
@@ -39,23 +39,23 @@
         <form action="./index.html" id="form" data-form="add">
             <div class="mb-3">
                 <label for="pname" class="form-label">Product Name:</label>
-                <input type="text" class="form-control" id="pname" required>
+                <input type="text" name="pname" class="form-control" id="pname" required>
             </div>
             <div class="mb-3">
                 <label for="pimg" class="form-label">Product Image:</label>
-                <input type="file" class="form-control" id="pimg" accept="images/*">
+                <input type="file" name="pimg" class="form-control" id="pimg" accept="images/*">
             </div>
             <div class="mb-3">
                 <label for="pprice" class="form-label">Product Price:</label>
-                <input type="number" class="form-control" id="pprice" aria-describedby="emailHelp" required>
+                <input type="number" name="pprice" class="form-control" id="pprice" aria-describedby="emailHelp" required>
             </div>
             <div class="mb-3">
                 <label for="ptext" class="form-label">Description:</label>
-                <input type="textarea" class="form-control" id="ptext" aria-describedby="emailHelp" required>
+                <input type="textarea" name="ptext" class="form-control" id="ptext" aria-describedby="emailHelp" required>
             </div>
             <div class="mb-3">
                 <label for="category" class="form-label">Product Category:</label>
-                <select class="form-select" id="selectCategory" data-type="addcategory" required>
+                <select class="form-select" name="category" id="selectCategory" data-type="addcategory" required>
 
                 </select>
             </div>
@@ -64,7 +64,7 @@
         </form>
         <div class="mb-3">
             <label for="pinput" class="form-label">Search:</label>
-            <input type="input" class="form-control" id="pinput" aria-describedby="emailHelp"
+            <input type="input" name="pinput" class="form-control" id="pinput" aria-describedby="emailHelp"
                 placeholder="search the product by its Id or name">
         </div>
         <table id="table" class="table">
