@@ -210,7 +210,7 @@ function addData() {
         disc,
         category,
     };
-data.push(data1);
+    data.push(data1);
     localStorage.setItem('crud', JSON.stringify(data));
     renderProducts();
 }

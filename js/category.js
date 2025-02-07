@@ -86,12 +86,12 @@ function deleteProduct(id) {
 function addData() {
     let name = document.getElementById("cname").value;
     let id = parseInt((category.length > 0) ? category[category.length - 1].id + 1 : 1);
-let data1 = {
+    let data1 = {
         id,
         name,
     };
     category.push(data1);
-    localStorage.setItem('category', JSON.stringify(category)); 
+    localStorage.setItem('category', JSON.stringify(category));
     renderProducts();
 }
 
@@ -111,7 +111,7 @@ function editData() {
 
 let form = document.querySelector("#form");
 form.addEventListener("submit", (event) => {
-    event.preventDefault(); 
+    event.preventDefault();
     console.log(form.dataset.form);
     if (form.dataset.form == "add") {
         addData();

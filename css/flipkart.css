@@ -86,36 +86,36 @@ body {
 }
 
 .card-img-top {
-    max-width: 100%;   
+    max-width: 100%;
 }
 
-.instruments{
+.instruments {
     overflow-x: scroll;
 }
 
-.header-perent{
+.header-perent {
     flex-direction: column;
 }
 
-.ct{
+.ct {
     text-align: center;
-    
+
 }
 
-.dn{
+.dn {
     display: block;
     width: 20%;
 }
 
-.dn1{
+.dn1 {
     width: 100%;
 }
 
-.instruments{
+.instruments {
     overflow-x: scroll;
 }
 
-.instruments2{
+.instruments2 {
     overflow-x: scroll;
     width: 80%;
 }
@@ -157,8 +157,8 @@ body {
     }
 }
 
-@media (max-width:1200){
-    .img-dis{
+@media (max-width:1200) {
+    .img-dis {
         display: none;
     }
 }

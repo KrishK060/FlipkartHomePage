@@ -15,7 +15,7 @@ if (filteredProducts.length === 0) {
     productList.innerHTML = '<p>No products available in this category.</p>';
 }
 filteredProducts.forEach(product => {
-        if (!rowsCategory[product.category]) {
+    if (!rowsCategory[product.category]) {
         const Container = document.createElement('div');
         Container.classList.add('container', 'bg-light', 'mt-3', 'p-2');
 
@@ -24,7 +24,7 @@ filteredProducts.forEach(product => {
         Container.appendChild(categoryHeading);
 
         const categoryRow = document.createElement('div');
-        categoryRow.classList.add('row', 'g-3'); 
+        categoryRow.classList.add('row', 'g-3');
         categoryRow.setAttribute('id', `row-${product.category}`);
 
         Container.appendChild(categoryRow);
@@ -33,7 +33,7 @@ filteredProducts.forEach(product => {
         rowsCategory[product.category] = categoryRow;
     }
     const col = document.createElement('div');
-    col.classList.add('col-md-4', 'd-flex'); 
+    col.classList.add('col-md-4', 'd-flex');
 
     col.innerHTML = `
         <div class="card w-100">
