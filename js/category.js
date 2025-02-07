@@ -1,7 +1,5 @@
-// let data = JSON.parse(localStorage.getItem('crud')) || [];
 let category = JSON.parse(localStorage.getItem('category')) || [];
 let idForUpadate = "";
-
 
 function renderProducts(filteredData = category) {
     const tbody = document.querySelector('#table tbody');
@@ -53,14 +51,12 @@ function renderProducts(filteredData = category) {
 }
 renderProducts();
 
-
 function editProduct(id) {
     document.getElementById('form').dataset.form = "edit";
     let product = category.find(item => item.id == id);
     idForUpadate = id;
     document.getElementById('cname').value = product.name;
 }
-
 
 let isAscending = true;
 document.querySelectorAll(".btn").forEach((button) => {
@@ -78,7 +74,6 @@ document.querySelectorAll(".btn").forEach((button) => {
     });
 });
 
-
 function deleteProduct(id) {
     const productIndex = category.findIndex(item => item.id == id);
     if (productIndex !== -1) {
@@ -90,37 +85,29 @@ function deleteProduct(id) {
 
 function addData() {
     let name = document.getElementById("cname").value;
-
     let id = parseInt((category.length > 0) ? category[category.length - 1].id + 1 : 1);
-
-    let data1 = {
+let data1 = {
         id,
         name,
     };
-    
     category.push(data1);
     localStorage.setItem('category', JSON.stringify(category)); 
     renderProducts();
 }
 
-
 function editData() {
     const updatedName = document.getElementById("cname").value;
-
     const updatedProduct = {
         id: parseInt(idForUpadate),
         name: updatedName,
     };
-
     const productIndex = category.findIndex(item => item.id == parseInt(idForUpadate));
     if (productIndex !== -1) {
         category[productIndex] = updatedProduct;
     }
-
     localStorage.setItem('category', JSON.stringify(category));
     renderProducts();
 }
-
 
 let form = document.querySelector("#form");
 form.addEventListener("submit", (event) => {

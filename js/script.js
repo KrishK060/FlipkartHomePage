@@ -192,7 +192,6 @@ function deleteProduct(id) {
     if (productIndex !== -1) {
         data.splice(productIndex, 1);
         localStorage.setItem('crud', JSON.stringify(data));
-       
         window.location.reload();
     }
 }
@@ -201,9 +200,8 @@ function addData() {
     let name = document.getElementById("pname").value;
     let price = document.getElementById("pprice").value;
     let disc = document.getElementById("ptext").value;
-    let category = document.getElementById("selectCategory").value; 
+    let category = document.getElementById("selectCategory").value;
     let id = parseInt((data.length > 0) ? data[data.length - 1].id + 1 : 1);
-
     let data1 = {
         id,
         name,
@@ -212,10 +210,8 @@ function addData() {
         disc,
         category,
     };
-
-    data.push(data1);
-    localStorage.setItem('crud', JSON.stringify(data)); 
-    
+data.push(data1);
+    localStorage.setItem('crud', JSON.stringify(data));
     renderProducts();
 }
 
@@ -239,15 +235,13 @@ function editData() {
     if (productIndex !== -1) {
         data[productIndex] = updatedProduct;
     }
-
     localStorage.setItem('crud', JSON.stringify(data));
-    
     renderProducts();
 }
 
 let form = document.querySelector("#form");
 form.addEventListener("submit", (event) => {
-    event.preventDefault(); 
+    event.preventDefault();
     console.log(form.dataset.form);
     if (form.dataset.form == "add") {
         addData();
@@ -260,7 +254,7 @@ form.addEventListener("submit", (event) => {
 
 
 
-    
+
 
 
 

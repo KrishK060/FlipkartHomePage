@@ -1,14 +1,9 @@
 const selectedCategory = JSON.parse(localStorage.getItem('category')) || [];
 const products = JSON.parse(localStorage.getItem('crud')) || [];
-
 const productList = document.getElementById('accessories-section');
 productList.innerHTML = '';
-
-
-let categoryRows = {};
-
+let rowsCategory = {};
 let filteredProducts = [];
-
 products.forEach((product) => {
     selectedCategory.forEach((scategory) => {
         if (product.category == scategory.name) {
@@ -16,38 +11,27 @@ products.forEach((product) => {
         }
     });
 });
-
-
 if (filteredProducts.length === 0) {
     productList.innerHTML = '<p>No products available in this category.</p>';
 }
-
-
 filteredProducts.forEach(product => {
-    
-    if (!categoryRows[product.category]) {
-    
-        const categoryContainer = document.createElement('div');
-        categoryContainer.classList.add('container', 'bg-light', 'mt-3', 'p-2');
-
+        if (!rowsCategory[product.category]) {
+        const Container = document.createElement('div');
+        Container.classList.add('container', 'bg-light', 'mt-3', 'p-2');
 
         const categoryHeading = document.createElement('h4');
         categoryHeading.textContent = product.category;
-        categoryContainer.appendChild(categoryHeading);
+        Container.appendChild(categoryHeading);
 
-    
         const categoryRow = document.createElement('div');
         categoryRow.classList.add('row', 'g-3'); 
         categoryRow.setAttribute('id', `row-${product.category}`);
 
-        categoryContainer.appendChild(categoryRow);
-        productList.appendChild(categoryContainer);
+        Container.appendChild(categoryRow);
+        productList.appendChild(Container);
 
-        
-        categoryRows[product.category] = categoryRow;
+        rowsCategory[product.category] = categoryRow;
     }
-
-    
     const col = document.createElement('div');
     col.classList.add('col-md-4', 'd-flex'); 
 
@@ -55,12 +39,10 @@ filteredProducts.forEach(product => {
         <div class="card w-100">
             <img src="${product.img}" class="card-img-top" alt="${product.name}">
             <div class="card-body">
-                <h5 class="card-title">${product.name}</h5>
+                <h5 class="card-title text-center">${product.name}</h5>
                 <p class="card-text">$${product.price}</p>
             </div>
         </div>
     `;
-
-    
-    categoryRows[product.category].appendChild(col);
+    rowsCategory[product.category].appendChild(col);
 });
