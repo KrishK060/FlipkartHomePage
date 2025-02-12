@@ -1,6 +1,15 @@
 let category = JSON.parse(localStorage.getItem('category')) || [];
 let idForUpadate = "";
-
+const searchInput = document.querySelector('#cinput');
+searchInput.addEventListener('input', function () {
+    const searchValue = searchInput.value.trim();
+    if (searchValue !== "") {
+        const filteredData = category.filter(item => item.id == searchValue || item.name.includes(searchValue));
+        renderProducts(filteredData);
+    } else {
+        renderProducts(data);
+    }
+});
 function renderProducts(filteredData = category) {
     const tbody = document.querySelector('#table tbody');
     tbody.innerHTML = '';
@@ -104,9 +113,12 @@ function editData() {
 let form = document.querySelector("#form");
 form.addEventListener("submit", (event) => {
     event.preventDefault();
+
     if (form.dataset.form == "add") {
+   
         addData();
     } else {
         editData();
     }
+         document.getElementById("cname").value = ""
 });

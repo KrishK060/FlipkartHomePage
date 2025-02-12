@@ -90,7 +90,7 @@ function editProduct(id) {
     document.getElementById('pname').value = product.name;
     document.getElementById('pprice').value = product.price;
     document.getElementById('ptext').value = product.disc;
-    document.getElementById('category').value = product.category;
+    document.getElementById('selectCategory').value = product.category;
     let previewImg = document.querySelector('#pimg');
     previewImg.src = product.img;
     previewImg.style.display = 'block';
@@ -101,7 +101,7 @@ fileInput.addEventListener('change', async (e) => {
     const reader = new FileReader();
     reader.onloadend = function () {
         base64String = reader.result;
-        console.log(base64String);
+
     };
     reader.readAsDataURL(file);
 });
@@ -247,6 +247,7 @@ form.addEventListener("submit", (event) => {
     } else {
         editData();
     }
+     document.getElementById("cname").value = ""
 });
 
 
