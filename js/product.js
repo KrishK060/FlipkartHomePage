@@ -1,6 +1,7 @@
 const fileInput = document.querySelector('#pimg');
 let base64String = "";
 let data = JSON.parse(localStorage.getItem('crud')) || [];
+let category = JSON.parse(localStorage.getItem('category')) || [];
 const searchInput = document.querySelector('#pinput');
 let idForUpadate = "";
 
@@ -48,6 +49,9 @@ function renderProducts(filteredData = data) {
         const descriptionCell = document.createElement('td');
         descriptionCell.innerHTML = item.disc;
 
+        const categorycell = document.createElement('td')
+        categorycell.innerHTML = item.category;
+
         const actionCell = document.createElement('td');
         const editBtn = document.createElement('button');
         editBtn.classList.add('btn', 'btn-primary');
@@ -72,6 +76,7 @@ function renderProducts(filteredData = data) {
         row.appendChild(priceCell);
         row.appendChild(descriptionCell);
         row.appendChild(actionCell);
+        row.appendChild(categorycell);
 
         tbody.appendChild(row);
     });
@@ -85,6 +90,7 @@ function editProduct(id) {
     document.getElementById('pname').value = product.name;
     document.getElementById('pprice').value = product.price;
     document.getElementById('ptext').value = product.disc;
+    document.getElementById('selectCategory').value = product.category;
     let previewImg = document.querySelector('#pimg');
     previewImg.src = product.img;
     previewImg.style.display = 'block';
@@ -95,7 +101,7 @@ fileInput.addEventListener('change', async (e) => {
     const reader = new FileReader();
     reader.onloadend = function () {
         base64String = reader.result;
-        console.log(base64String);
+
     };
     reader.readAsDataURL(file);
 });
@@ -151,6 +157,10 @@ function toggleSort(field) {
     }
     renderProducts();
 }
+for (let i = 0; i < category.length; i++) {
+    selectCategory.innerHTML += ` <option value="${category[i]['name']}">${category[i]['name']}</option>`;
+    selectCategory.dataset.val = i;
+}
 
 let isAscending = true;
 document.querySelectorAll(".btn").forEach((button) => {
@@ -158,6 +168,7 @@ document.querySelectorAll(".btn").forEach((button) => {
         switch (button.dataset.type) {
             case "editdata":
                 const ProductID = button.dataset.id;
+                document.getElementById("btn1").innerHTML = `edit`;
                 editProduct(ProductID);
                 break;
             case "deldata":
@@ -182,7 +193,6 @@ function deleteProduct(id) {
     if (productIndex !== -1) {
         data.splice(productIndex, 1);
         localStorage.setItem('crud', JSON.stringify(data));
-        deleteProductOnFlipkart(id);
         window.location.reload();
     }
 }
@@ -191,21 +201,18 @@ function addData() {
     let name = document.getElementById("pname").value;
     let price = document.getElementById("pprice").value;
     let disc = document.getElementById("ptext").value;
-    let category = document.getElementById("category").value; // Get selected category
+    let category = document.getElementById("selectCategory").value;
     let id = parseInt((data.length > 0) ? data[data.length - 1].id + 1 : 1);
-
     let data1 = {
         id,
         name,
         img: base64String,
         price,
         disc,
-        category, // Add category to product data
+        category,
     };
-
     data.push(data1);
-    localStorage.setItem('crud', JSON.stringify(data)); // Save updated data
-    updateFlipkartHomepage(data1); // Sync with Flipkart page
+    localStorage.setItem('crud', JSON.stringify(data));
     renderProducts();
 }
 
@@ -214,7 +221,7 @@ function editData() {
     const updatedImg = base64String || data.find(item => item.id === parseInt(idForUpadate)).img;
     const updatedPrice = document.getElementById("pprice").value;
     const updatedDesc = document.getElementById("ptext").value;
-    const updatedCategory = document.getElementById("category").value;
+    const updatedCategory = document.getElementById("selectCategory").value;
 
     const updatedProduct = {
         id: parseInt(idForUpadate),
@@ -229,86 +236,31 @@ function editData() {
     if (productIndex !== -1) {
         data[productIndex] = updatedProduct;
     }
-
     localStorage.setItem('crud', JSON.stringify(data));
-    updateFlipkartHomepage(updatedProduct); // Sync with Flipkart page
+    document.getElementById("btn1").innerHTML = `Submit`;
     renderProducts();
 }
 
 let form = document.querySelector("#form");
 form.addEventListener("submit", (event) => {
-    event.preventDefault(); // Prevent default form submission
-    console.log(form.dataset.form);
+    event.preventDefault();
     if (form.dataset.form == "add") {
         addData();
     } else {
         editData();
     }
+     document.getElementById("pname").value = ""
+     document.getElementById("pprice").value = ""
+     document.getElementById("ptext").value = ""
+     form.dataset.form = "add" 
+     
 });
 
-function updateFlipkartHomepage(product) {
-    let flipkartData = JSON.parse(localStorage.getItem('crud')) || [];
-    const existingIndex = flipkartData.findIndex(item => item.id == product.id);
-
-    if (existingIndex !== -1) {
-        flipkartData[existingIndex] = product;
-    } else {
-        flipkartData.push(product);
-    }
-
-    localStorage.setItem('crud', JSON.stringify(flipkartData));
-    renderFlipkartHomepage();
-}
-function renderFlipkartHomepage() {
-    const jewelrySection = document.getElementById('jewelry-products');
-    const accessoriesSection = document.getElementById('accessories-products');
-
-    if (!jewelrySection || !accessoriesSection) return;
-
-    jewelrySection.innerHTML = '';
-    accessoriesSection.innerHTML = '';
-
-    let flipkartData = JSON.parse(localStorage.getItem('crud')) || [];
-
-    flipkartData.forEach(product => {
-        const productCard = createProductCard(product);
-        if (product.category === 'jewelry') {
-            jewelrySection.appendChild(productCard);
-        } else if (product.category === 'accessories') {
-            accessoriesSection.appendChild(productCard);
-        }
-    });
-}
 
 
-function createProductCard(product) {
-    const card = document.createElement('div');
-    card.classList.add('col-md-4', 'mb-4');
-    card.innerHTML = `
-        <div class="card">
-            <img src="${product.img}" class="card-img-top" alt="${product.name}">
-            <div class="card-body">
-                <h5 class="card-title">${product.name}</h5>
-                <p class="card-text">${product.disc}</p>
-                <p class="card-text"><strong>Price:</strong> $${product.price}</p>
-                <button class="btn btn-primary" onclick="editProductOnFlipkart(${product.id})">Edit</button>
-                <button class="btn btn-danger" onclick="deleteProductOnFlipkart(${product.id})">Delete</button>
-            </div>
-        </div>
-    `;
-    return card;
-}
 
-function deleteProductOnFlipkart(id) {
-    let flipkartData = JSON.parse(localStorage.getItem('crud')) || [];
-    flipkartData = flipkartData.filter(item => item.id != id);
-    localStorage.setItem('crud', JSON.stringify(flipkartData));
-    renderFlipkartHomepage();
-}
 
-function editProductOnFlipkart(id) {
-    alert(`Editing product: ${id}`);
-}
 
-// Ensure Flipkart page updates on load
-document.addEventListener("DOMContentLoaded", renderFlipkartHomepage);
+
+
+
