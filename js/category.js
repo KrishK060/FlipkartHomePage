@@ -115,10 +115,10 @@ form.addEventListener("submit", (event) => {
     event.preventDefault();
 
     if (form.dataset.form == "add") {
-   
         addData();
     } else {
         editData();
     }
          document.getElementById("cname").value = ""
+         form.dataset.form = "add" 
 });

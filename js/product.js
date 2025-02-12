@@ -247,7 +247,11 @@ form.addEventListener("submit", (event) => {
     } else {
         editData();
     }
-     document.getElementById("cname").value = ""
+     document.getElementById("pname").value = ""
+     document.getElementById("pprice").value = ""
+     document.getElementById("ptext").value = ""
+     form.dataset.form = "add" 
+     
 });
 
 
