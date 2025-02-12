@@ -168,6 +168,7 @@ document.querySelectorAll(".btn").forEach((button) => {
         switch (button.dataset.type) {
             case "editdata":
                 const ProductID = button.dataset.id;
+                document.getElementById("btn1").innerHTML = `edit`;
                 editProduct(ProductID);
                 break;
             case "deldata":
@@ -236,6 +237,7 @@ function editData() {
         data[productIndex] = updatedProduct;
     }
     localStorage.setItem('crud', JSON.stringify(data));
+    document.getElementById("btn1").innerHTML = `Submit`;
     renderProducts();
 }
 

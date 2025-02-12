@@ -65,6 +65,7 @@ document.querySelectorAll(".btn").forEach((button) => {
         switch (button.dataset.type) {
             case "editdata":
                 const ProductID = button.dataset.id;
+                document.getElementById("btn1").innerHTML = `edit`;
                 editProduct(ProductID);
                 break;
             case "deldata":
@@ -97,6 +98,7 @@ function addData() {
 }
 
 function editData() {
+   
     const updatedName = document.getElementById("cname").value;
     const updatedProduct = {
         id: parseInt(idForUpadate),
@@ -107,6 +109,7 @@ function editData() {
         category[productIndex] = updatedProduct;
     }
     localStorage.setItem('category', JSON.stringify(category));
+    document.getElementById("btn1").innerHTML = `Add Category`;
     renderProducts();
 }
 
@@ -118,6 +121,7 @@ form.addEventListener("submit", (event) => {
         addData();
     } else {
         editData();
+        
     }
          document.getElementById("cname").value = ""
          form.dataset.form = "add" 
